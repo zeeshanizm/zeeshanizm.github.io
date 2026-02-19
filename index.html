@@ -51,6 +51,33 @@ section.show{opacity:1;transform:none}
 .p-card:hover::before{opacity:1}
 .p-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 0 35px rgba(99,102,241,.7)}
 
+.terminal-prompt {
+    color: #64ffda;
+    font-weight: 600;
+    margin-right: 4px;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    display: inline-block;
+}
+
+.typing {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    display: inline-block;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    margin-left: 2px;
+    animation: blink 1s infinite;
+    color: #64ffda;
+    font-weight: 600;
+    text-shadow: 0 0 6px #64ffda;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+  
 footer{text-align:center;padding:45px;color:#94a3b8}
 
 @media(max-width:768px){.hero h1{font-size:36px}nav{gap:8px;padding:10px 14px}nav a{font-size:12px}}
@@ -356,8 +383,60 @@ footer{text-align:center;padding:45px;color:#94a3b8}
 <footer>© 2026 Zeeshan Ahmad — DevOps Engineer</footer>
 
 <script>
-const words=["DevOps Engineer","Cloud Automation Specialist","Kubernetes Architect","CI/CD Expert"];let i=0,j=0,del=false;const el=document.querySelector('.typing');(function type(){if(!del&&j<=words[i].length){el.textContent=words[i].slice(0,j++);}else if(del&&j>=0){el.textContent=words[i].slice(0,j--);}if(j==words[i].length+15)del=true;if(j<0){del=false;i=(i+1)%words.length;}setTimeout(type,120)})();
+const words = ["DevOps Engineer", "IT Infrastructure Consultant"];
+let wordIndex = 0;
+let charIndex = 0;
+let deleting = false;
 
+// Select your typing span
+const el = document.querySelector(".typing");
+
+// Create a prompt before typing span
+let prompt = document.querySelector(".terminal-prompt");
+if (!prompt) {
+    prompt = document.createElement("span");
+    prompt.className = "terminal-prompt";
+    prompt.textContent = "zeeshan@cloud:~$ ";
+    el.before(prompt);
+}
+
+// Create cursor after typing span
+let cursor = document.querySelector(".terminal-cursor");
+if (!cursor) {
+    cursor = document.createElement("span");
+    cursor.className = "terminal-cursor";
+    cursor.textContent = "▮";
+    el.after(cursor);
+}
+
+// Fix width so no clipping
+const maxLength = Math.max(...words.map(w => w.length)) + 3; // buffer
+el.style.display = "inline-block";
+el.style.minWidth = `${maxLength}ch`;
+el.style.whiteSpace = "pre"; // preserve spaces
+
+(function type() {
+    const word = words[wordIndex];
+
+    if (!deleting) {
+        el.textContent = word.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === word.length) {
+            setTimeout(() => deleting = true, 1600);
+        }
+    } else {
+        el.textContent = word.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+            deleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+        }
+    }
+
+    setTimeout(type, deleting ? 70 : 110);
+})();
+
+  
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})},{threshold:.15});document.querySelectorAll('section').forEach(s=>obs.observe(s));
 
 window.addEventListener('scroll',()=>{document.querySelectorAll('section').forEach(sec=>{let top=window.scrollY;if(top>=sec.offsetTop-200&&top<sec.offsetTop+sec.offsetHeight){document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));document.querySelector(`nav a[href="#${sec.id}"]`)?.classList.add('active')}})});
