@@ -51,6 +51,7 @@ section.show{opacity:1;transform:none}
 .p-card:hover::before{opacity:1}
 .p-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 0 35px rgba(99,102,241,.7)}
 
+
 .terminal-prompt {
     color: #64ffda;
     font-weight: 600;
@@ -73,6 +74,12 @@ section.show{opacity:1;transform:none}
     text-shadow: 0 0 6px #64ffda;
 }
 
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+
 
 .architecture-diagram {
   max-width: 100%;
@@ -89,13 +96,37 @@ section.show{opacity:1;transform:none}
 .clear-section {
   clear: both;
 }
-    
 
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+
+.footer-signature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #cbd5f5;
 }
-  
+
+.footer-icon svg {
+  color: #6cf2c2;
+  filter: drop-shadow(0 0 6px rgba(108,242,194,0.9));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.footer-icon svg:hover {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 12px rgba(108,242,194,1));
+}
+
+.footer-tagline {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #9aa6d6;
+  text-align: center;
+  letter-spacing: 0.4px;
+}
+
+
 footer{text-align:center;padding:45px;color:#94a3b8}
 
 @media(max-width:768px){.hero h1{font-size:36px}nav{gap:8px;padding:10px 14px}nav a{font-size:12px}}
@@ -131,6 +162,9 @@ footer{text-align:center;padding:45px;color:#94a3b8}
 <section id="about">
   <h2>About Me</h2>
 
+<!-- Spacer -->
+<div style="height:15px; clear:both;"></div>
+
   <div class="card">
     <p>
       I am a seasoned IT Infrastructure Consultant and DevOps Engineer with over a decade of experience designing, modernizing, and optimizing high-performance, cloud-native platforms. Throughout my career, I have partnered with enterprises and fast-growing organizations to transform traditional infrastructure into automated, scalable, and resilient ecosystems that accelerate delivery and drive business value.
@@ -164,6 +198,10 @@ footer{text-align:center;padding:45px;color:#94a3b8}
 </section>
 <section id="experience">
 <h2>Experience</h2>
+
+<!-- Spacer -->
+<div style="height:15px; clear:both;"></div>
+
 <div class="timeline">
 
 <div class="t-item">
@@ -255,6 +293,10 @@ footer{text-align:center;padding:45px;color:#94a3b8}
 
 <section id="skills">
   <h2>Technical Skills</h2>
+
+<!-- Spacer -->
+<div style="height:15px; clear:both;"></div>
+
   <p style="text-align:center;color:#94a3b8;margin-bottom:40px">
     Competencies and Skills in DevOps and Cloud Infrastructure
   </p>
@@ -278,6 +320,9 @@ footer{text-align:center;padding:45px;color:#94a3b8}
 
 <section id="work">
   <h2>What I Do</h2>
+
+<!-- Spacer -->
+<div style="height:30px; clear:both;"></div>
 
   <div class="projects">
 
@@ -348,11 +393,13 @@ footer{text-align:center;padding:45px;color:#94a3b8}
     <p style="margin-top:8px;color:#cbd5f5;line-height:1.65">
       Design highly available systems, implement disaster recovery strategies, and manage incidents using alerting, runbooks, and root cause analysis to ensure maximum uptime.
     </p>
+
   </div>
 </div>
 
 
   </div>
+
 
 
 <!-- Spacer -->
@@ -366,12 +413,17 @@ footer{text-align:center;padding:45px;color:#94a3b8}
 </div>
 
 <!-- Spacer -->
-<div style="height:50px; clear:both;"></div>
+<div style="height:40px; clear:both;"></div>
 
-    
 </section>
 <section id="contact">
+
   <h2 style="text-align:center">Contact</h2>
+
+
+<!-- Spacer -->
+<div style="height:10px; clear:both;"></div>
+
 
   <div class="card" style="text-align:center">
 
@@ -414,7 +466,28 @@ footer{text-align:center;padding:45px;color:#94a3b8}
 </section>
 
 
-<footer>© 2026 Zeeshan Ahmad — DevOps Engineer</footer>
+<footer>
+
+  <!-- Footer -->
+  <div class="footer-signature">
+    © 2026 Zeeshan • Build • Automate • Deploy • Scale • Secure • Optimize
+    <span class="footer-icon">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </div>
+
+  <div class="footer-tagline">
+    Designing resilient cloud infrastructure & elite automation pipelines.
+  </div>
+
+</footer>
 
 <script>
 const words = ["DevOps Engineer", "IT Infrastructure Consultant"];
@@ -470,7 +543,6 @@ el.style.whiteSpace = "pre"; // preserve spaces
     setTimeout(type, deleting ? 70 : 110);
 })();
 
-  
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})},{threshold:.15});document.querySelectorAll('section').forEach(s=>obs.observe(s));
 
 window.addEventListener('scroll',()=>{document.querySelectorAll('section').forEach(sec=>{let top=window.scrollY;if(top>=sec.offsetTop-200&&top<sec.offsetTop+sec.offsetHeight){document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));document.querySelector(`nav a[href="#${sec.id}"]`)?.classList.add('active')}})});
@@ -482,6 +554,7 @@ document.querySelectorAll('.p-card').forEach(card=>{card.addEventListener('mouse
 document.querySelectorAll('[data-count]').forEach(el=>{let t=+el.dataset.count,c=0;let i=setInterval(()=>{c++;el.textContent=c;if(c>=t)clearInterval(i)},28)});
 
 fetch('https://api.github.com/users/zeeshanizm/repos?sort=updated').then(r=>r.json()).then(d=>{let h='';d.slice(0,6).forEach(r=>{h+=`<div class=\"p-card\"><h3>${r.name}</h3><p>${r.description||'No description'}</p></div>`});document.getElementById('repo').innerHTML=h});
+
 </script>
 
 </body>
