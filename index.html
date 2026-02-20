@@ -73,6 +73,24 @@ section.show{opacity:1;transform:none}
     text-shadow: 0 0 6px #64ffda;
 }
 
+
+.architecture-diagram {
+  max-width: 100%;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.architecture-diagram:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.clear-section {
+  clear: both;
+}
+    
+
 @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
@@ -335,6 +353,22 @@ footer{text-align:center;padding:45px;color:#94a3b8}
 
 
   </div>
+
+
+<!-- Spacer -->
+<div style="height:50px; clear:both;"></div>
+
+<!-- Master Architecture Diagram -->
+<div class="p-card" data-aos="fade-up" data-aos-delay="200" style="text-align:center;">
+  <img src="devops-master-architecture.png"
+       alt="Enterprise DevOps & Cloud Architecture"
+       class="img-fluid architecture-diagram">
+</div>
+
+<!-- Spacer -->
+<div style="height:50px; clear:both;"></div>
+
+    
 </section>
 <section id="contact">
   <h2 style="text-align:center">Contact</h2>
